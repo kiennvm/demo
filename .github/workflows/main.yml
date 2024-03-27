@@ -27,7 +27,7 @@ jobs:
 
     - name: Build the app
       run: |
-        echo $APP_IMAGE
+        echo ${{env.APP_IMAGE}}
 #        mvn clean
 #        mvn -B package
 ##
