@@ -42,7 +42,7 @@ jobs:
         context: .
         dockerfile: Dockerfile
         push: true
-        tags: $APP_IMAGE
+        tags: "$APP_IMAGE"
 
     - name: Deploy to EC2
       run: |
