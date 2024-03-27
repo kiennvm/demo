@@ -47,9 +47,10 @@ jobs:
     - name: Deploy to EC2
       run: |
         export SSH_KEY=key.pem
+        export APP_NAME=dksh-be
         cat <<< "${{ secrets.EC2_SSH_KEY }}" > $SSH_KEY
         chmod 400 $SSH_KEY
         ssh -o StrictHostKeyChecking=no -i $SSH_KEY ec2-user@${{ secrets.EC2_PUBLIC_DOMAIN}} /bin/bash << EOF
-        docker rm -f dksh-be
-        docker run --rm --name dksh-be -d -p8081:8080 ${{ env.APP_IMAGE }}
+        docker rm -f $APP_NAME
+        docker run --rm --name $APP_NAME -d -p8080:8080 ${{ env.APP_IMAGE }}
         EOF
