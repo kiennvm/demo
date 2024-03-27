@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  APP_IMAGE: ${{ secrets.DOCKER_HUB_USERNAME}}/demo:${{ github.sha }}
+  APP_IMAGE: ${{ env.DOCKER_HUB_USERNAME}}/demo:${{ github.sha }}
 
 jobs:
   build-deploy:
