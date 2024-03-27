@@ -27,7 +27,6 @@ jobs:
 
     - name: Build the app
       run: |
-        echo $APP_IMAGE
         mvn clean
         mvn -B package
 
@@ -43,7 +42,7 @@ jobs:
         context: .
         dockerfile: Dockerfile
         push: true
-        tags: $APP_IMAGE
+        tags: ${{ env.APP_IMAGE }}
 
     - name: Deploy to EC2
       run: |
