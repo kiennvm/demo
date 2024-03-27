@@ -13,7 +13,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Add SHORT_SHA env property with commit short sha
+    - name: Add commit short sha
       run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
 
     - name: Setup JDK 17
@@ -51,3 +51,11 @@ jobs:
         dockerfile: Dockerfile
         push: true
         tags: ${{ secrets.DOCKER_HUB_USERNAME}}/demo:${SHORT_SHA}
+
+    - name: Deploy to EC2
+      run: |
+        export SSH_KEY=key.pem
+        cat <<< ${{ secrets.EC2_SSH_KEY }} > $SSH_KEY
+        chmod 400 $SSH_KEY
+        ssh -i $SSH_KEY ec2-user@${{ secrets.EC2_PUBLIC_DOMAIN}}
+        mkdir test
