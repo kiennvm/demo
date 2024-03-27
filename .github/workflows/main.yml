@@ -51,5 +51,5 @@ jobs:
         chmod 400 $SSH_KEY
         ssh -o StrictHostKeyChecking=no -i $SSH_KEY ec2-user@${{ secrets.EC2_PUBLIC_DOMAIN}} /bin/bash << EOF
         docker rm -f dksh-be
-        docker run --rm --name dksh-be -d -p8080:8080 ${{ env.APP_IMAGE }}
+        docker run --rm --name dksh-be -d -p8081:8080 ${{ env.APP_IMAGE }}
         EOF
